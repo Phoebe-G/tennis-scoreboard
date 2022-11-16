@@ -1,9 +1,17 @@
-import styles from "./PlayerColumn.module.css"
+import styles from "./PlayerColumn.module.css";
+import { useState, memo } from "react";
 
-const PlayerColumn = (props:any) => 
+const PlayerColumn = (
+    {playerName, callback}: {playerName:string, callback:Function}
+) => {
+    let increment = () => callback(playerName);
+
+    return (
     <div className={styles.GTPlayerColumn}>
-        <h2>{props.playerName}</h2>
-        <button>Increment Score</button>
+        <h2>{playerName}</h2>
+        <button onClick={increment}>Increment Score</button>
     </div>
+    );
+}
 
-export default PlayerColumn
+export default memo(PlayerColumn);

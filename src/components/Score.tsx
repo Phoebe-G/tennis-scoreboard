@@ -1,18 +1,37 @@
+/*
+* Map raw points to their representational score value
+*/
+const scoreMap = new Map<number, number>([
+    [0, 0],
+    [1, 15],
+    [2, 30],
+    [4, 40]
+]);
 
-const translateScore = (score_0:Number, score_1:Number) => {
-        return <>{score_0}-{score_1}</>
+/*
+* Take the current scores and apply the scoring logic to produce
+* the appropriate output.
+*/
+const translateScore = (score_0:number, score_1:number) => {
+    if(Math.max(score_0, score_1) > 3) {
+        return <>{"Endgame edge cases.."}</>
+    } else {
+        return <>{scoreMap.get(score_0)}-{scoreMap.get(score_1)}</>
+    }
 }
-        
-var scores:Array<Number> = Array(2);
+	
+/*
+* Score component, tracks & displays the game score / result
+*/
 
-scores[0] = 0;
-scores[1] = 0;
-
-let Score = (props:any) => {
-
-        return  <div className="gt-score-card">
-                    <h1>{translateScore(scores[0], scores[1])}</h1>
-                </div>
+let Score = (
+    { player1, player2, scores }: { player1:string, player2:string, scores:Map<string,number> }
+) => {
+    /* non-null assertion required because map returns undefined if the key is not present.
+    (We only call with the strings used to initialise the map so this is unlikely to be an issue) */
+	return  <div className="gt-score-card">
+			    <h1>{translateScore(scores.get(player1)!, scores.get(player2)!)}</h1>
+		    </div>
 }
 
-export default Score
+export default Score;
