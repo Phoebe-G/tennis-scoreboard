@@ -1,19 +1,28 @@
 import PlayerControls from "./PlayerControls";
 import Score from "./Score";
 import React from "react";
+import { stringify } from "querystring";
 
-const Scoreboard = (
+var Scoreboard = (
     { player1, player2 }: { player1:string, player2:string }
 ) => {
-    
-    let score = new Map<string, number>();
-    score.set(player1, 0);
-    score.set(player2, 0);
 
-    const [scores, setScores] = React.useState(score);
+    const [scores, setScores] = React.useState(new Map<string,number>([[player1, 0], [player2, 0]]));
 
-    var increment = () => {
-        alert("increment!");
+    var increment = (playerName:string) => {
+        // scores.set(playerName, scores.get(playerName)! + 1);
+
+        let newScores:Map<string, number> = new Map();
+
+        scores.forEach((value, key) => {
+            if (key == playerName) {
+                newScores.set(key, value + 1);
+            } else {
+                newScores.set(key, value);
+            }
+        });
+
+        setScores(newScores);
     }
 
     return (
@@ -25,4 +34,4 @@ const Scoreboard = (
     );
 }
 
-export default React.memo(Scoreboard);
+export default Scoreboard;
