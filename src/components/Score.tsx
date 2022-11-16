@@ -9,29 +9,37 @@ const scoreMap = new Map<number, number>([
 ]);
 
 /*
-* Take the current scores and apply the scoring logic to produce
+* Take the current points tally and apply the scoring logic to produce
 * the appropriate output.
 */
-const translateScore = (score_0:number, score_1:number) => {
-    if(Math.max(score_0, score_1) > 3) {
-        return <>{"Endgame edge cases.."}</>
+const translateScore = (player1:string, player2:string, scores:Map<string,number>) => {
+    let score0 = scores.get(player1) || 0,
+        score1 = scores.get(player2) || 0;
+
+    if(Math.max(score0, score1) > 3) {
+        if(Math.abs(score0 - score1) >= 2) {
+            return <>{(score0 > score1 ? player1 : player2) + " Wins!" }</>
+        } else if(Math.abs(score0 - score1) == 0) {
+            return <>{"Deuce"}</>
+        } else {
+
+            return <>{(score0 > score1 ? player1 : player2) + " Advantage" }</>
+        }
     } else {
-        return <>{scoreMap.get(score_0)}-{scoreMap.get(score_1)}</>
+        return <>{scoreMap.get(score0)}-{scoreMap.get(score1)}</>
     }
 }
 	
 /*
-* Score component, tracks & displays the game score / result
+* Score component, displays the game score / result
 */
-
-let Score = (
+const Score = (
     { player1, player2, scores }: { player1:string, player2:string, scores:Map<string,number> }
 ) => {
-    console.log("Score rendered");
     /* non-null assertion required because map returns undefined if the key is not present.
     (We only call with the strings used to initialise the map so this is unlikely to be an issue) */
 	return  <div className="gt-score-card">
-			    <h1>{translateScore(scores.get(player1)!, scores.get(player2)!)}</h1>
+			    <h1>{translateScore(player1, player2, scores)}</h1>
 		    </div>
 }
 
