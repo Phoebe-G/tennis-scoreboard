@@ -1,8 +1,8 @@
 import styles from "./PlayerColumn.module.css"
 
-const PlayerColumn = () => 
+const PlayerColumn = (props:any) => 
     <div className={styles.GTPlayerColumn}>
-        <h2>Player #</h2>
+        <h2>{props.playerName}</h2>
         <button>Increment Score</button>
     </div>
 
