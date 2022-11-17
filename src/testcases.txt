@@ -1,0 +1,8 @@
+
+
+* test the mapping of 'points' to the 'score' ie 1 -> 15 etc.
+* test the case of a "direct" win, one user repeatedly winning 4 times in a row should produce a win
+* test the 'deuce' case
+* test the 'advantage' case
+* test 'advantage' -> 'deuce' -> 'advantage' -> 'win'
+* test that the game ceases at the end state (ie that the loser cannot overtake the winner by continuing to 'score')
