@@ -9,7 +9,7 @@ const PlayerColumn = (
     return (
     <div className={styles.GTPlayerColumn}>
         <h2>{playerName}</h2>
-        <button onClick={increment}>Increment Score</button>
+        <div className={styles.GTBtnIncrement} onClick={increment}></div>
     </div>
     );
 }

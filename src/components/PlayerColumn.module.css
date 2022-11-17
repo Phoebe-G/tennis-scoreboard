@@ -3,4 +3,31 @@
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
+    padding-bottom: 32px;
+}
+
+.GTPlayerColumn .GTBtnIncrement {
+    display:block;
+    position: relative;
+    background-color: #005ebf;
+    border:1px solid #005ebf;
+    border-radius:32px;
+    width: 64px;
+    height: 64px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.GTPlayerColumn .GTBtnIncrement::before {
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    content: '+';
+    color: white;
+    font-size: 64px;
+}
+
+.GTPlayerColumn:first-of-type {
+    border-right: 1px solid #cdcdcd;
 }

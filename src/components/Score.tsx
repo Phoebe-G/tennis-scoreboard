@@ -12,13 +12,14 @@ const scoreMap = new Map<number, number>([
 * Take the current points tally and apply the scoring logic to produce
 * the appropriate output.
 */
-const translateScore = (player1:string, player2:string, scores:Map<string,number>) => {
+const translateScore = (player1:string, player2:string, scores:Map<string,number>, gameoverCallback:Function) => {
     let score0 = scores.get(player1) || 0,
         score1 = scores.get(player2) || 0;
 
     if(Math.max(score0, score1) > 3) {
         if(Math.abs(score0 - score1) >= 2) {
             // a player has achieved a winstate of > 40 && 2 points ahead
+            gameoverCallback();
             return <>{(score0 > score1 ? player1 : player2) + " Wins!" }</>
         } else if(Math.abs(score0 - score1) == 0) {
             // both scores are equal, it must be deuce
@@ -37,10 +38,10 @@ const translateScore = (player1:string, player2:string, scores:Map<string,number
 * Score component, displays the game score / result
 */
 const Score = (
-    { player1, player2, scores }: { player1:string, player2:string, scores:Map<string,number> }
+    { player1, player2, scores, gameoverCallback }: { player1:string, player2:string, scores:Map<string,number>, gameoverCallback:Function }
 ) => {
-	return  <div className="gt-score-card">
-			    <h1>{translateScore(player1, player2, scores)}</h1>
+	return  <div className="GTScoreCard">
+			    <h1>{translateScore(player1, player2, scores, gameoverCallback)}</h1>
 		    </div>
 }
 
