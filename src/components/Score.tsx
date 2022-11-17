@@ -18,14 +18,17 @@ const translateScore = (player1:string, player2:string, scores:Map<string,number
 
     if(Math.max(score0, score1) > 3) {
         if(Math.abs(score0 - score1) >= 2) {
+            // a player has achieved a winstate of > 40 && 2 points ahead
             return <>{(score0 > score1 ? player1 : player2) + " Wins!" }</>
         } else if(Math.abs(score0 - score1) == 0) {
+            // both scores are equal, it must be deuce
             return <>{"Deuce"}</>
         } else {
-
+            // the only remaining case is Advantage to one player or another
             return <>{(score0 > score1 ? player1 : player2) + " Advantage" }</>
         }
     } else {
+        // neither player has passed the 40 point minimum for the game to have a winner yet
         return <>{scoreMap.get(score0)}-{scoreMap.get(score1)}</>
     }
 }
@@ -36,8 +39,6 @@ const translateScore = (player1:string, player2:string, scores:Map<string,number
 const Score = (
     { player1, player2, scores }: { player1:string, player2:string, scores:Map<string,number> }
 ) => {
-    /* non-null assertion required because map returns undefined if the key is not present.
-    (We only call with the strings used to initialise the map so this is unlikely to be an issue) */
 	return  <div className="gt-score-card">
 			    <h1>{translateScore(player1, player2, scores)}</h1>
 		    </div>
