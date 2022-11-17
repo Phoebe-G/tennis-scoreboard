@@ -19,10 +19,10 @@
     cursor: pointer;
 }
 
-.GTPlayerColumn .GTBtnIncrement::before {
+.GTPlayerColumn .GTBtnIncrement::after {
     position: absolute;
-    top: -10px;
-    left: 14px;
+    top: -7px;
+    left: 13px;
     content: '+';
     color: white;
     font-size: 64px;
